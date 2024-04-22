@@ -1,0 +1,20 @@
+{
+  "name": "vaj-be",
+  "version": "1.0.0",
+  "description": "TODO: Write description or instructions",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node --loader ts-node/esm src/index.ts"
+  },
+  "author": "Jakub Hýža",
+  "license": "MIT",
+  "dependencies": {
+    "@tsconfig/node20": "^20.1.4",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "express": "^4.19.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
