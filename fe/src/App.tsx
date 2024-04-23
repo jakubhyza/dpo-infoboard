@@ -1,11 +1,11 @@
-import { StopSearch } from "./components/admin/StopSearch"
 import {BrowserRouter,Route, Routes} from 'react-router-dom';
+import PageIndex from './pages/PageIndex';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/demo-admin/search" Component={StopSearch} />
+        <Route path='/' Component={PageIndex} />
       </Routes>
     </BrowserRouter>
   )

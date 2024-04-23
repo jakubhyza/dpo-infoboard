@@ -1,0 +1,12 @@
+html {
+	font-family: sans-serif;
+}
+
+input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.5rem;
+	border-radius: .5rem;
+	border: 1px solid #ccc;
+	background: #eee;
+}
