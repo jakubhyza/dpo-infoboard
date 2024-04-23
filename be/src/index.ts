@@ -1,9 +1,14 @@
 import express from 'express';
+import cors from 'cors';
 import { dpoSeachStops, dpoStopTimes } from './dpo/dpo-api.js';
+
 
 const app = express();
 const port = 8080;
 
+app.use(cors({
+	origin: '*',
+}));
 app.use(express.json());
 app.get('/api/stops/search', async (req, res) => {
 	const query = req.query.q;
@@ -11,8 +16,9 @@ app.get('/api/stops/search', async (req, res) => {
 		res.status(400).send('Invalid query');
 		return;
 	}
+
 	const data = await dpoSeachStops(query);
-	return res.json(data);
+	res.json(data);
 });
 
 app.get('/api/stops/:id', async (req, res) => {
@@ -22,7 +28,7 @@ app.get('/api/stops/:id', async (req, res) => {
 		return;
 	}
 	const data = await dpoStopTimes(id);
-	return res.json(data);
+	res.json(data);
 });
 
 app.listen(port, () => {

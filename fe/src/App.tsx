@@ -1,4 +1,4 @@
-import { StopSearch } from "./admin/StopSearch"
+import { StopSearch } from "./components/admin/StopSearch"
 import {BrowserRouter,Route, Routes} from 'react-router-dom';
 
 function App() {

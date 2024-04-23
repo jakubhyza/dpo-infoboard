@@ -20,7 +20,7 @@ class Cache<T> {
 				if (this.records[key]) {
 					delete this.records[key];
 				}
-			}),
+			}, this.maxAge),
 		};
 	}
 
