@@ -1,0 +1,23 @@
+.Layout {
+	max-width: 100%;
+	width: 50rem;
+	margin: 1rem auto;
+}
+.LayoutHeader {
+	background-color: #333;
+	display: flex;
+}
+.LayoutHeader a {
+	display: inline-block;
+	color: white;
+	padding: 1rem;
+	text-decoration: none;
+}
+.LayoutHeader a:hover {
+	background-color: #555;
+}
+
+.LayoutContent {
+	padding: 1rem;
+	background: #f4f4f4;
+}

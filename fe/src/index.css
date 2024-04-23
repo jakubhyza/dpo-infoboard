@@ -11,6 +11,12 @@ input {
 	border: 1px solid #ccc;
 	background: #eee;
 }
+input[type="color"] {
+	height: 2rem;
+	box-sizing: border-box;
+	padding: 0;
+	cursor: pointer;
+}
 
 .bold {
 	font-weight: bold;
