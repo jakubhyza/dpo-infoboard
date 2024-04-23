@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node --loader ts-node/esm src/index.ts",
-    "init": "npx prisma migrate dev"
+    "migrate": "npx prisma migrate dev"
   },
   "author": "Jakub Hýža",
   "license": "MIT",

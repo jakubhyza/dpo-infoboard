@@ -13,14 +13,6 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-model User {
-  id      String   @id @default(cuid())
-  name    String
-  email   String   @unique
-  password String
-  infoboards Infoboard[]
-}
-
 model Infoboard {
   id              String   @id @default(cuid())
   title           String
@@ -29,6 +21,4 @@ model Infoboard {
   layout          String   @default("simple")
   primaryColor    String   @default("orange")
   backgroundColor String   @default("black")
-  userId          String
-  user            User     @relation(fields: [userId], references: [id])
 }
