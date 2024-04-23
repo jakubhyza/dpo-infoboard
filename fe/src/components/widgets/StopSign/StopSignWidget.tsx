@@ -35,7 +35,7 @@ function StopSignWidget({ stopId }: StopSignWidgetProps) {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setRefresh(!refresh);
-		}, 1000 * 20);
+		}, 1000 * 10);
 
 		return () => {
 			clearInterval(interval);

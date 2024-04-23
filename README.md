@@ -32,7 +32,7 @@ This app was build on
 2. Run `npm install` in both `be` and `fe` folders
 
 ### Running the app (dev environment)
-1. Run `npm run dev` in `be` folder and let it run
+1. Run `npm start` in `be` folder and let it run
 2. Run `npm run dev` in `fe` folder ale let it run
 
 API is running on `http://localhost:8080` 

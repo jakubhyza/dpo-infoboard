@@ -102,3 +102,22 @@ export async function dpoStopTimes(stopGroupID: string, startTime: Date | undefi
 	}
 	return data.stop;
 }
+
+export async function dpoEmergencies(): Promise<string[]> {
+	const data = await dpoGet<any>(DpoServers.DPO, '/api/cms/content/published', {
+		distribution: 'dashboard',
+		locale: 'cs',
+		category: 'emergencies',
+	});
+
+	if (!data) {
+		return [];
+	}
+	if (!data.items) {
+		return [];
+	}
+
+	return data.items.map((item: any) => {
+		return `${item.item.title}: ${item.item.description}`
+	});
+}

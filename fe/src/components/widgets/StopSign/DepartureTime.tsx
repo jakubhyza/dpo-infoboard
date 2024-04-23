@@ -4,17 +4,17 @@ function DepartureTime({ time }: { time: number }) {
 	const t15minutes = 15 * 60;
 
 	if (diff <= 60) {
-		return <b>*</b>;
+		return <span className="bold">*</span>;
 	}
 
 	if (diff < t15minutes) {
-		return <span><b>{Math.floor(diff / 60)}</b> min</span>;
+		return <span><span className="bold">{Math.floor(diff / 60)}</span> min</span>;
 	}
 
 	const departure = new Date(time * 1000);
 	const hours = departure.getHours();
 	const minutes = departure.getMinutes();
-	return <b>{hours.toString().padStart(2, '0')}:{minutes.toString().padStart(2, '0')}</b>;
+	return <span className="bold">{hours.toString().padStart(2, '0')}:{minutes.toString().padStart(2, '0')}</span>;
 }
 
 export default DepartureTime;

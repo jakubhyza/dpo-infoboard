@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { dpoSeachStops, dpoStopTimes } from './dpo/dpo-api.js';
+import { dpoEmergencies, dpoSeachStops, dpoStopTimes } from './dpo/dpo-api.js';
 import Cache from './cache.js';
 import { DpoStopGroupWithTrips } from './dpo/dpo-api.types.js';
 
@@ -38,6 +38,11 @@ app.get('/api/stops/:id', async (req, res) => {
 	}
 	const data = await dpoStopTimes(id);
 	stopCache.set(id, data);
+	res.json(data);
+});
+
+app.get('/api/emergencies', async (req, res) => {
+	const data = await dpoEmergencies();
 	res.json(data);
 });
 

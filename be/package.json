@@ -5,8 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.ts",
-    "dev": "node --loader ts-node/esm --watch src/index.ts"
+    "start": "node --loader ts-node/esm src/index.ts"
   },
   "author": "Jakub Hýža",
   "license": "MIT",
@@ -17,6 +16,7 @@
     "@types/node": "^20.12.7",
     "cors": "^2.8.5",
     "express": "^4.19.2",
+    "prisma": "^5.13.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
   }
