@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { DpoStopGroup } from "../types/dpo-api.types";
 import StopInput from "../components/stop-input/StopInput";
+import { Link } from "react-router-dom";
 
 function PageIndex() {
 	const [stop, setStop] = useState<DpoStopGroup | null>(null);
 
 	return (
-		<>
+		<div style={{
+			padding: '1rem 5rem',
+		}}>
 			<h2>Project VAJ 2024</h2>
 			<p>
 				This project was written by Jakub Hýža (HYZ0013). It allows you to create infoboards showing information about public transport in Ostrava. I chosed this topic because it is something I wanted to do for a long time but had no time to do it.
@@ -46,11 +49,9 @@ function PageIndex() {
 			<h3>Playground</h3>
 			<StopInput value={stop} onChange={(stop) => setStop(stop)} />
 			{stop && (
-				<pre>
-					{JSON.stringify(stop, null, 2)}
-				</pre>
+				<Link to={`/simple-stop/${stop.id}`}>Zobrazit zastávku</Link>
 			)}
-		</>
+		</div>
 	)
 }
 export default PageIndex;

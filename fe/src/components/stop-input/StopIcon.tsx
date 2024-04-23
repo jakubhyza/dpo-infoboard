@@ -1,7 +1,7 @@
 function getModeColor(mode: string) {
 	const colors: Record<string, string> = {
 		'BUS': 'blue',
-		'TRAIN': 'yellow',
+		'TRAIN': '#ffae00',
 		'TRAM': 'red',
 		'TROLL': 'green',
 	};

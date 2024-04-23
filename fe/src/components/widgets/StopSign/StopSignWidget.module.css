@@ -1,0 +1,55 @@
+.StopSignWidget {
+	display: block;
+	background-color: black;
+	color: orange;
+	width: 100%;
+	height: 100vh;
+	font-size: 3rem;
+	padding: 2rem;
+	box-sizing: border-box;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	gap: .25rem;
+}
+
+.StopSignWidgetGradient {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(180deg, transparent 0%, transparent 65%, black 100%);
+}
+
+.Message {
+	flex: 1 1 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.TripWidget {
+	display: flex;
+	gap: 1.5rem;
+}
+.TripWidget__ShortName {
+	flex: 0 0 5rem;
+	text-align: right;
+	font-weight: bold;
+}
+.TripWidget__HeadSign {
+	flex: 1 1 auto;
+	font-weight: bold;
+}
+
+.StopSignHeading {
+	display: block;
+	border-bottom: 2px solid orange;
+	padding-bottom: .75rem;
+	margin-bottom: 2rem;
+	padding-left: 6rem;
+	font-size: 1em;
+	font-weight: normal;
+}

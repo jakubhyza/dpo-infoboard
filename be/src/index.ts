@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import { dpoSeachStops, dpoStopTimes } from './dpo/dpo-api.js';
+import Cache from './cache.js';
+import { DpoStopGroupWithTrips } from './dpo/dpo-api.types.js';
 
 
 const app = express();
@@ -21,13 +23,21 @@ app.get('/api/stops/search', async (req, res) => {
 	res.json(data);
 });
 
+const stopCache = new Cache<DpoStopGroupWithTrips | undefined>(1000 * 60 * 10);
 app.get('/api/stops/:id', async (req, res) => {
 	const id = req.params.id;
 	if (typeof id !== 'string') {
 		res.status(400).send('Invalid ID');
 		return;
 	}
+	const cachedData = stopCache.get(id);
+	if (cachedData) {
+		console.log(`Returning cached data for ${id}`);
+		res.json(cachedData);
+		return;
+	}
 	const data = await dpoStopTimes(id);
+	stopCache.set(id, data);
 	res.json(data);
 });
 
