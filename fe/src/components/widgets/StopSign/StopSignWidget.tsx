@@ -18,13 +18,13 @@ function StopSignWidget({ stopId }: StopSignWidgetProps) {
 	const [stopData, setStopData] = useState<DpoStopGroupWithTrips | null>(null);
 	const [refresh, setRefresh] = useState<boolean>(false);
 
-	// Fetch new data every 10 minutes
+	// Fetch new data every 5 minutes
 	useEffect(() => {
 		loadStopData(stopId).then(setStopData);
 
 		const interval = setInterval(() => {
 			loadStopData(stopId).then(setStopData);
-		}, 1000 * 60 * 10);
+		}, 1000 * 60 * 5);
 
 		return () => {
 			clearInterval(interval);

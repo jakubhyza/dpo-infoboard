@@ -23,7 +23,7 @@ app.get('/api/stops/search', async (req, res) => {
 	res.json(data);
 });
 
-const stopCache = new Cache<DpoStopGroupWithTrips | undefined>(1000 * 60 * 10);
+const stopCache = new Cache<DpoStopGroupWithTrips | undefined>(1000 * 60 * 45);
 app.get('/api/stops/:id', async (req, res) => {
 	const id = req.params.id;
 	if (typeof id !== 'string') {
