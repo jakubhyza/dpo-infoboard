@@ -304,3 +304,7 @@ node_modules
 psd
 thumb
 sketch
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal

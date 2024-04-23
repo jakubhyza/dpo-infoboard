@@ -5,19 +5,23 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --loader ts-node/esm src/index.ts"
+    "start": "node --loader ts-node/esm src/index.ts",
+    "init": "npx prisma migrate dev"
   },
   "author": "Jakub Hýža",
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^5.13.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^20.12.7",
     "cors": "^2.8.5",
     "express": "^4.19.2",
-    "prisma": "^5.13.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "prisma": "^5.13.0"
   }
 }
