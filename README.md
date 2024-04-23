@@ -1,20 +1,4 @@
 ## Project VAJ 2024
-
-### Instructions
-
-https://docs.google.com/document/d/1mbYYzY0j7Xq8KX8a2ei2_Ta1AQUWpfcpD0tORZt8AD4/edit?usp=sharing
-
-Split your projects into 2 JS projects. You will have 2x package.json. One will be for BE in folder be, one will be for FE in folder fe. 
-
-You can write instructions to your project either in this README ind in separeate README files in the folders be, fe. 
-
-Delete this text after you finish :) 
-
-Good luck!
-
-
-# Not finished yet!!!
-
 This project was written by Jakub Hýža (HYZ0013). It allows you to create infoboards showing information about public transport in Ostrava. I chosed this topic because it is something I wanted to do for a long time but had no time to do it.
 
 ### Source of data
@@ -30,6 +14,7 @@ This app was build on
 ### Setup instructions (dev environment)
 1. Clone this repository
 2. Run `npm install` in both `be` and `fe` folders
+3. Run `npm run migrate` in `be` folder
 
 ### Running the app (dev environment)
 1. Run `npm start` in `be` folder and let it run
