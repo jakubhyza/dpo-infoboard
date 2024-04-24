@@ -1,8 +1,9 @@
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import { useState } from "react";
 import { deleteSign } from "../lib/api";
 import ProtectLogin from "../components/protect/ProtectLogin";
+import Button from "../atomic/Button";
 
 function PageSignDelete() {
 	const { id } = useParams<{ id: string }>();
@@ -17,17 +18,17 @@ function PageSignDelete() {
 			<ProtectLogin>
 				<h1>Opravdu chcete smazat tuto tabuli?</h1>
 				<p>ID tabule: {id}</p>
-				<button onClick={async () => {
-					await deleteSign(id);
-					setRedirect(true);
-				}}>
-					Ano, smazat
-				</button>
-				<Link to="/admin/signs">
-					<button>
+				<div style={{display: 'flex', gap: '1rem'}}>
+					<Button type="danger" onClick={async () => {
+						await deleteSign(id);
+						setRedirect(true);
+					}}>
+						Ano, smazat
+					</Button>
+					<Button to="/admin/signs">
 						Ne, nechci smazat
-					</button>
-				</Link>
+					</Button>
+				</div>
 			</ProtectLogin>
 		</Layout>
 	);

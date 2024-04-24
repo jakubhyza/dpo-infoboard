@@ -43,39 +43,67 @@ function SignEditor(props: SignEditorProps) {
 	return (
 		<>
 			<h1>{sign.id !== '-1' ? 'Upravit' : 'Vytvořit'} tabuli</h1>
-			<label>
-				Název tabule:
-				<input type="text" value={sign.title} onChange={(e) => setSign({ ...sign, title: e.target.value })} required minLength={3} />
-				{sign.title.length < 3 && <span style={errorStyle}>Název musí mít alespoň 3 znaky</span>}
-			</label>
-			<br />
-			<br />
+			<form onSubmit={handleSubmit} style={{
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '1rem',
+			}}>
+				<label>
+					<div>
+						Název tabule:
+					</div>
+					<div style={{margin: '.5rem 0'}}>
+						<input type="text" value={sign.title} onChange={(e) => setSign({ ...sign, title: e.target.value })} required minLength={3} />
+					</div>
+					<div>
+						{sign.title.length < 3 && <span style={errorStyle}>Název musí mít alespoň 3 znaky</span>}
+					</div>
+				</label>
 
-			Zastávka:
-			<div>
-				<StopInput value={initialStop} onChange={(stops) => setSign({ ...sign, stops: stops?.id ?? '' })} />
-				<br />
-				{!sign.stops && <span style={errorStyle}>Vyberte zastávku</span>}
-			</div>
+				<div>
+					<div>
+						Zastávka:
+					</div>
+					<div style={{margin: '.5rem 0'}}>
+						<StopInput value={initialStop} onChange={(stops) => setSign({ ...sign, stops: stops?.id ?? '' })} />
+					</div>
+					<div>
+						{!sign.stops && <span style={errorStyle}>Vyberte zastávku</span>}
+					</div>
+				</div>
 
-			<br />
-			<br />
+				<div style={{
+					display: 'flex',
+					gap: '1rem',
+				}}>
+					<label style={{
+						flex: '1 1 50%',
+					}}>
+						<div>
+							Primární barva:
+						</div>
+						<div style={{margin: '.5rem 0'}}>
+							<input type="color" value={sign.primaryColor} onChange={(e) => setSign({ ...sign, primaryColor: e.target.value })} />
+						</div>
+					</label>
+					<label style={{
+						flex: '1 1 50%',
+					}}>
+						<div>
+							Pozadí:
+						</div>
+						<div style={{margin: '.5rem 0'}}>
+							<input type="color" value={sign.backgroundColor} onChange={(e) => setSign({ ...sign, backgroundColor: e.target.value })} />
+						</div>
+					</label>
+				</div>
 
-			<label>
-				Primární barva:
-				<input type="color" value={sign.primaryColor} onChange={(e) => setSign({ ...sign, primaryColor: e.target.value })} />
-			</label>
-			<br />
-			<br />
-			<label>
-				Pozadí:
-				<input type="color" value={sign.backgroundColor} onChange={(e) => setSign({ ...sign, backgroundColor: e.target.value })} />
-			</label>
-			<br />
-			<br />
-			<button onClick={handleSubmit}>
-				Uložit tabuli
-			</button>
+				<div className="box-align-right">
+					<button className="button button--primary">
+						Uložit tabuli
+					</button>
+				</div>
+			</form>
 		</>
 	);
 }

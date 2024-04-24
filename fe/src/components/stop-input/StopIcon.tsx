@@ -4,10 +4,14 @@ function getModeColor(mode: string) {
 		'TRAIN': '#ffae00',
 		'TRAM': 'red',
 		'TROLL': 'green',
+		'NONE': 'black',
 	};
 	return colors[mode] ?? 'black';
 }
 function getMostImportantMode(modes: string[]) {
+	if (modes.length === 0) {
+		return 'NONE';
+	}
 	if (modes.includes('TRAIN')) {
 		return 'TRAIN';
 	}

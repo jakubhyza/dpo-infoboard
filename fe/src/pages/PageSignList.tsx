@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import { useEffect, useState } from "react";
 import { Infoboard } from "../types/config.types";
 import { listSigns } from "../lib/api";
 import ProtectLogin from "../components/protect/ProtectLogin";
+import styles from './PageSignList.module.css';
+import Button from "../atomic/Button";
 
 function PageSignList() {
 	const [signs, setSigns] = useState<Infoboard[]>([]);
@@ -15,41 +16,42 @@ function PageSignList() {
 	return (
 		<Layout>
 			<ProtectLogin>
-				<h1>Tabule</h1>
-				<Link to="/admin/new/sign">
-					Vytvořit novou tabuli
-				</Link>
-				<br />
-				<br />
-				<table style={{
-					width: '100%',
-				}}>
-					<thead>
-						<tr>
-							<th>Název</th>
-							<th>Akce</th>
-						</tr>
-					</thead>
-					<tbody>
-						{signs.map((sign) => (
-							<tr key={sign.id}>
-								<td>{sign.title}</td>
-								<td style={{
-									textAlign: 'right',
-								}}>
-									<a target="_blank" href={`/sign/${sign.id}`}>Otevřít</a>
-									{' '}
-									<Link to={`/admin/signs/${sign.id}`}>
-										Upravit
-									</Link>
-									{' '}
-									<Link to={`/admin/signs/delete/${sign.id}`} style={{color: 'red'}}>Smazat</Link>
-								</td>
-							</tr>
+				<div className={styles.Header}>
+					<div>
+						<h1>Tabule</h1>
+					</div>
+					<div>
+						<Button to="/admin/new/sign" type="success">
+							Vytvořit novou tabuli
+						</Button>
+					</div>
+				</div>
+				<div  className={styles.Table}>
+					{signs.map((sign) => (
+						<div key={sign.id} className={styles.Record}>
+							<div className={styles.RecordTitle}>{sign.title}</div>
+							<div className={styles.RecordActions}>
+								<a
+									target="_blank"
+									className="button button--primary"
+									href={`/sign/${sign.id}`}
+								>
+									Otevřít
+								</a>
+								<Button to={`/admin/signs/${sign.id}`}>
+									Upravit
+								</Button>
+								<Button
+									to={`/admin/signs/delete/${sign.id}`}
+									type="danger"
+								>
+									Smazat
+								</Button>
+							</div>
+						</div>
+					))}
+				</div>
 
-						))}
-					</tbody>
-				</table>
 			</ProtectLogin>
 		</Layout>
 	)

@@ -9,7 +9,8 @@ function PageSign() {
 	const [infoboard, setInfoboard] = useState<Infoboard | null>(null);
 
 	useEffect(() => {
-		if (!id) {
+		console.log(infoboard);
+		if (!id || infoboard) {
 			return;
 		}
 		loadSign(id).then(setInfoboard);

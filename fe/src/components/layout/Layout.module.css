@@ -4,9 +4,10 @@
 	margin: 1rem auto;
 }
 .LayoutHeader {
-	background-color: #333;
+	background: linear-gradient(0deg, #212121, #4f4f4f);
 	display: flex;
 	border-radius: 5px;
+	overflow: hidden;
 }
 
 .LayoutContent {

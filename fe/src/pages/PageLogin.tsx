@@ -57,7 +57,7 @@ function PageLogin() {
 				</label>
 				<br />
 				<br />
-				<button type="submit">Přihlásit se</button>
+				<button className="button button--primary" type="submit">Přihlásit se</button>
 			</form>
 		</Layout>
 	)

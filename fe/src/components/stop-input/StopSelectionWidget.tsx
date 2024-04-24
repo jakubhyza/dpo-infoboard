@@ -1,24 +1,36 @@
-import { DpoStopGroup } from "../../types/dpo-api.types";
 import StopIcon from "./StopIcon";
-import style from './StopSelectionWidget.module.css';
+import styles from './StopSelectionWidget.module.css';
 
-function StopSelectionWidget({stop, onClick = () => {}}: StopSelectionWidgetProps) {
+function StopSelectionWidget({stop, onClick = () => {}, style}: StopSelectionWidgetProps) {
 	return (
-		<div className={style.StopWidget} onClick={onClick}>
+		<div className={styles.StopWidget} onClick={onClick} style={style}>
 			<div>
 				<StopIcon modes={stop.modes} />
 			</div>
 			<div>
-				<div className={style.StopWidgetName}>{stop.name}</div>
-				<div className={style.StopWidgetLines}>Linky {stop.routes.join(', ')}</div>
+				<div className={styles.StopWidgetName}>{stop.name}</div>
+				{typeof(stop.routes) !== 'string' && stop.routes.length > 0 && (
+					<div className={styles.StopWidgetLines}>Linky {stop.routes.join(', ')}</div>
+				)}
+				{ typeof(stop.routes) !== 'string' && stop.routes.length === 0 && (
+					<div className={styles.StopWidgetLines}>{'-'}</div>
+				)}
+				{typeof(stop.routes) === 'string' && (
+					<div className={styles.StopWidgetLines}>{stop.routes}</div>
+				)}
 			</div>
 		</div>
 	);
 }
 
 interface StopSelectionWidgetProps {
-	stop: DpoStopGroup;
+	stop: {
+		modes: string[];
+		name: string;
+		routes: string[] | string;
+	};
 	onClick: () => void;
+	style?: React.CSSProperties;
 }
 
 export default StopSelectionWidget;

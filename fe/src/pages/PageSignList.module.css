@@ -1,0 +1,26 @@
+.Header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+
+.Table {
+	display: flex;
+	flex-direction: column;
+}
+
+.Record {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	align-items: center;
+}
+.Record:nth-child(odd) {
+	background-color: rgb(231, 231, 231);
+}
+
+.RecordActions {
+	display: flex;
+	gap: .5rem;
+}

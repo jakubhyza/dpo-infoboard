@@ -18,8 +18,17 @@ input[type="color"] {
 	cursor: pointer;
 }
 
+a {
+	color: #007bff;
+}
+
 .bold {
 	font-weight: bold;
+}
+
+.box-align-right {
+	display: flex;
+	justify-content: flex-end;
 }
 
 .blinking {
@@ -51,15 +60,49 @@ input[type="color"] {
 }
 
 .menu-item {
-	border-radius: 5px;
 	display: inline-block;
 	color: white;
 	padding: 1rem;
 	text-decoration: none;
 }
 .menu-item:hover {
-	background-color: #444;
+	background: linear-gradient(180deg, #212121, #4f4f4f);
 }
 .menu-item.active {
-	background-color: #4caf50;
+	background: linear-gradient(0deg, #237127, #42c148);
+}
+
+
+.button {
+	display: inline-block;
+	text-decoration: none;
+	background: linear-gradient(0deg, #7c7c7c, #919191);
+	border: none;
+	font-size: 1rem;
+	color: white;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.button:hover {
+	background: linear-gradient(180deg, #7c7c7c, #919191);
+}
+
+.button--success {
+	background: linear-gradient(0deg, #439746, #4caf50);
+}
+.button--success:hover {
+	background: linear-gradient(180deg, #439746, #4caf50);
+}
+.button--primary {
+	background: linear-gradient(0deg, #0668cf, #1f7de0);
+}
+.button--primary:hover {
+	background: linear-gradient(180deg, #0668cf, #1f7de0);
+}
+.button--danger {
+	background: linear-gradient(0deg, #a7201c, #b32b27);
+}
+.button--danger:hover {
+	background: linear-gradient(180deg, #a7201c, #b32b27);
 }

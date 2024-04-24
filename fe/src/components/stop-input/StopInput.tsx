@@ -3,6 +3,7 @@ import { DpoStopGroup } from "../../types/dpo-api.types";
 import Modal from "../modal/Modal";
 import StopSearch from "./StopSearch";
 import StopSelectionWidget from "./StopSelectionWidget";
+import Button from "../../atomic/Button";
 
 
 
@@ -14,7 +15,13 @@ function StopInput({value = null, onChange = () => {}}: StopInputProps) {
 	return (
 		<>
 			{!stop && (
-				<button onClick={() => setShowSearch(true)}>Klikni pro výběr zastávky</button>
+				<StopSelectionWidget stop={{
+					name: 'Není vybrána žádná zastávka',
+					modes: [],
+					routes: 'Klikněte pro výběr zastávky',
+				}} onClick={() => {
+					setShowSearch(true);
+				}} />
 			)}
 			{stop && (
 				<div
@@ -22,11 +29,11 @@ function StopInput({value = null, onChange = () => {}}: StopInputProps) {
 						display: 'flex',
 					}}
 				>
-					<StopSelectionWidget stop={stop} onClick={() => setShowSearch(true)} />
-					<button onClick={() => {
+					<StopSelectionWidget style={{borderRadius: '5px 0 0 5px', flex: '1 1 auto'}} stop={stop} onClick={() => setShowSearch(true)} />
+					<Button type="danger" style={{borderRadius: '0 5px 5px 0'}} onClick={() => {
 						setStop(null);
 						onChange(null);
-					}}>Odebrat</button>
+					}}>Odebrat</Button>
 				</div>
 			)}
 			{showSearch && (
@@ -42,6 +49,7 @@ function StopInput({value = null, onChange = () => {}}: StopInputProps) {
 							fontSize: '1.5rem',
 						}}>Výběr zastávky</h1>
 						<button
+							type="button"
 							onClick={() => setShowSearch(false)}
 						>
 							X
