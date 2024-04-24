@@ -4,6 +4,7 @@ import Layout from "../components/layout/Layout";
 import { useEffect, useState } from "react";
 import { Infoboard } from "../types/config.types";
 import { loadSign, updateSign } from "../lib/api";
+import ProtectLogin from "../components/protect/ProtectLogin";
 
 function PageSignEdit() {
 	const id = useParams().id;
@@ -13,10 +14,10 @@ function PageSignEdit() {
 	const [infoboard, setInfoboard] = useState<Infoboard | null>(null);
 
 	useEffect(() => {
-		if (id) {
+		if (id && !loaded) {
 			loadSign(id).then(setInfoboard).then(() => setLoaded(true));
 		}
-	}, [infoboard, id]);
+	}, [id, loaded]);
 
 	if (redirect) {
 		return (
@@ -34,10 +35,12 @@ function PageSignEdit() {
 
 	return (
 		<Layout>
-			<SignEditor initialData={infoboard} onSave={async (sign) => {
-				await updateSign(sign);
-				setRedirect(true);
-			}} />
+			<ProtectLogin>
+				<SignEditor initialData={infoboard} onSave={async (sign) => {
+					await updateSign(sign);
+					setRedirect(true);
+				}} />
+			</ProtectLogin>
 		</Layout>
 	);
 }

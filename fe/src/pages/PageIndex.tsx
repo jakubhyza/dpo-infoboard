@@ -42,7 +42,8 @@ function PageIndex() {
 
 			<h3>Ukázka aplikace</h3>
 			<p>
-				Nahoře v menu je možné se překliknout na "Úprava tabulí". Zde je možné snadno vytvářet nové tabule a upravovat již existující.<br />
+				Přihlaste se do aplikace pomocí uživatelského jména `admin` a hesla `admin`.<br />
+				Po přihlášení je v menu možné se překliknout na "Úprava tabulí". Zde je možné snadno vytvářet nové tabule a upravovat již existující.<br />
 				Vytvořte novou tabuli, nezapomeňte vybrat zastávku. Po uložení se tabule objeví v seznamu a je možné ji otevřít na nové záložce.
 			</p>
 		</Layout>

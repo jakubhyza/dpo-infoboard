@@ -1,19 +1,25 @@
 import { PrismaClient } from '@prisma/client';
 import cors from 'cors';
 import express from 'express';
+import { sha512 } from 'js-sha512';
 import Cache from './cache.js';
 import { dpoEmergencies, dpoSeachStops, dpoStopTimes } from './dpo/dpo-api.js';
 import { DpoStopGroupWithTrips } from './dpo/dpo-api.types.js';
+import loginMiddleware from './middleware/login-middleware.js';
 
 const port = 8080;
 const app = express();
 const prisma = new PrismaClient();
 
+
 app.use(cors({
 	origin: '*',
 }));
 app.use(express.json());
-app.get('/api/stops/search', async (req, res) => {
+
+const stopCache = new Cache<DpoStopGroupWithTrips | undefined>(1000 * 60 * 45);
+
+app.get('/api/stops/search', loginMiddleware(prisma), async (req, res) => {
 	const query = req.query.q;
 	if (typeof query !== 'string') {
 		res.status(400).send('Invalid query');
@@ -24,7 +30,6 @@ app.get('/api/stops/search', async (req, res) => {
 	res.json(data);
 });
 
-const stopCache = new Cache<DpoStopGroupWithTrips | undefined>(1000 * 60 * 45);
 app.get('/api/stops/:id', async (req, res) => {
 	const id = req.params.id;
 	if (typeof id !== 'string') {
@@ -48,8 +53,47 @@ app.get('/api/emergencies', async (req, res) => {
 });
 
 
+app.post('/api/login', async (req, res) => {
+	const { username, password } = req.body;
+	if (typeof username !== 'string' || typeof password !== 'string') {
+		res.status(400).send('Invalid data');
+		return;
+	}
+	const user = await prisma.user.findFirst({
+		where: {
+			username,
+			password: sha512(password),
+		},
+	});
+	if (!user) {
+		res.status(401).send('Invalid credentials');
+		return;
+	}
+	const session = await prisma.userSessions.create({
+		data: {
+			userId: user.id,
+		},
+	});
+	res.json({
+		token: session.token,
+	});
+});
 
-// Database managament
+// Logged users only
+app.use(loginMiddleware(prisma));
+app.post('/api/logout', async (req, res) => {
+	const token = req.headers.authorization;
+	if (!token) {
+		res.status(400).send('Missing token');
+		return;
+	}
+	const session = await prisma.userSessions.delete({
+		where: {
+			token,
+		},
+	});
+	res.json(session);
+});
 
 app.get('/api/signs/:id', async (req, res) => {
 	const id = req.params.id;
@@ -60,6 +104,7 @@ app.get('/api/signs/:id', async (req, res) => {
 	const data = await prisma.infoboard.findUnique({
 		where: {
 			id,
+			userId: (req as any).user?.id,
 		},
 	});
 	if (!data) {
@@ -78,6 +123,7 @@ app.delete('/api/signs/:id', async (req, res) => {
 	const data = await prisma.infoboard.delete({
 		where: {
 			id,
+			userId: (req as any).user?.id,
 		},
 	});
 	res.json(data);
@@ -97,6 +143,7 @@ app.post('/api/signs/:id', async (req, res) => {
 	const result = await prisma.infoboard.update({
 		where: {
 			id,
+			userId: (req as any).user?.id,
 		},
 		data,
 	});
@@ -104,7 +151,11 @@ app.post('/api/signs/:id', async (req, res) => {
 });
 
 app.get('/api/signs', async (req, res) => {
-	const data = await prisma.infoboard.findMany();
+	const data = await prisma.infoboard.findMany({
+		where: {
+			userId: (req as any).user?.id,
+		},
+	});
 	res.json(data);
 });
 
@@ -115,7 +166,10 @@ app.post('/api/signs', async (req, res) => {
 		return;
 	}
 	const result = await prisma.infoboard.create({
-		data,
+		data: {
+			...data,
+			userId: (req as any).user?.id,
+		},
 	});
 	res.json(result);
 });

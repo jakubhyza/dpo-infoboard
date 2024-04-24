@@ -13,11 +13,28 @@ datasource db {
   url      = "file:./dev.db"
 }
 
+model User {
+  id        String   @id @default(cuid())
+  username  String
+  password  String
+  Infoboards Infoboard[]
+  UserSessions UserSessions[]
+}
+
 model Infoboard {
   id              String   @id @default(cuid())
+  userId          String
   title           String
   stops           String
   layout          String   @default("simple")
   primaryColor    String   @default("orange")
   backgroundColor String   @default("black")
+  user            User     @relation(fields: [userId], references: [id])
+}
+
+model UserSessions {
+  id        String @id @default(cuid())
+  userId    String
+  token     String @unique @default(cuid())
+  user      User   @relation(fields: [userId], references: [id])
 }

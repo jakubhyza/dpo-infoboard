@@ -1,8 +1,14 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Infoboard } from "../../types/config.types";
 import StopInput from "../stop-input/StopInput";
 import { DpoStopGroup } from "../../types/dpo-api.types";
 import { loadStopData } from "../../lib/api";
+
+const errorStyle = {
+	color: 'red',
+	margin: '.5rem 0',
+	display: 'block',
+};
 
 function SignEditor(props: SignEditorProps) {
 	const [sign, setSign] = useState<Infoboard>(props.initialData);
@@ -12,7 +18,23 @@ function SignEditor(props: SignEditorProps) {
 		if (props.initialData.stops && !initialStop) {
 			loadStopData(props.initialData.stops).then(setInitialStop);
 		}
-	}, [initialStop, props.initialData.stops])
+	}, [props.initialData, initialStop])
+
+	const handleSubmit = useCallback((e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (sign.title.length < 3) {
+			alert('Název tabule musí mít alespoň 3 znaky');
+			return;
+		}
+
+		if (!sign.stops) {
+			alert('Vyberte zastávku');
+			return;
+		}
+		props.onSave(sign);
+
+	}, [sign, props]);
 
 	if (!initialStop && props.initialData.stops) {
 		return "Načítám data...";
@@ -20,10 +42,11 @@ function SignEditor(props: SignEditorProps) {
 
 	return (
 		<>
-			<h1>Upravit tabuli</h1>
+			<h1>{sign.id !== '-1' ? 'Upravit' : 'Vytvořit'} tabuli</h1>
 			<label>
 				Název tabule:
-				<input type="text" value={sign.title} onChange={(e) => setSign({ ...sign, title: e.target.value })} />
+				<input type="text" value={sign.title} onChange={(e) => setSign({ ...sign, title: e.target.value })} required minLength={3} />
+				{sign.title.length < 3 && <span style={errorStyle}>Název musí mít alespoň 3 znaky</span>}
 			</label>
 			<br />
 			<br />
@@ -31,6 +54,8 @@ function SignEditor(props: SignEditorProps) {
 			Zastávka:
 			<div>
 				<StopInput value={initialStop} onChange={(stops) => setSign({ ...sign, stops: stops?.id ?? '' })} />
+				<br />
+				{!sign.stops && <span style={errorStyle}>Vyberte zastávku</span>}
 			</div>
 
 			<br />
@@ -48,7 +73,7 @@ function SignEditor(props: SignEditorProps) {
 			</label>
 			<br />
 			<br />
-			<button onClick={() => props.onSave(sign)}>
+			<button onClick={handleSubmit}>
 				Uložit tabuli
 			</button>
 		</>

@@ -37,3 +37,15 @@ input[type="color"] {
 		opacity: 1;
 	}
 }
+
+.menu {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.menu a {
+	display: block;
+}
+.menu a:last-of-type {
+	margin-left: auto;
+}

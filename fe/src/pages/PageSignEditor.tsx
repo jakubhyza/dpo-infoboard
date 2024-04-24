@@ -3,6 +3,7 @@ import SignEditor from "../components/editor/SignEditor";
 import Layout from "../components/layout/Layout";
 import { createSign } from "../lib/api";
 import { useState } from "react";
+import ProtectLogin from "../components/protect/ProtectLogin";
 
 
 function PageSignEditor() {
@@ -14,20 +15,22 @@ function PageSignEditor() {
 
 	return (
 		<Layout>
-			<SignEditor
-				initialData={{
-					backgroundColor: '#000000',
-					id: '-1',
-					layout: 'simple',
-					primaryColor: '#ffa500',
-					stops: "",
-					title: 'Nová tabule',
-				}}
-				onSave={async (sign) => {
-					await createSign(sign);
-					setRedirect(true);
-				}}
-			/>
+			<ProtectLogin>
+				<SignEditor
+					initialData={{
+						backgroundColor: '#000000',
+						id: '-1',
+						layout: 'simple',
+						primaryColor: '#ffa500',
+						stops: "",
+						title: 'Nová tabule',
+					}}
+					onSave={async (sign) => {
+						await createSign(sign);
+						setRedirect(true);
+					}}
+				/>
+			</ProtectLogin>
 		</Layout>
 	);
 }

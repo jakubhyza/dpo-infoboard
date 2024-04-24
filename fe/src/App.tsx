@@ -6,6 +6,8 @@ import PageSignList from './pages/PageSignList';
 import PageSignEdit from './pages/PageSignEdit';
 import PageSignDelete from './pages/PageSignDelete';
 import PageSign from './pages/PageSing';
+import PageLogin from './pages/PageLogin';
+import PageLogout from './pages/PageLogout';
 
 function WidgetPage() {
   const {id} = useParams();
@@ -23,6 +25,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/admin/login" Component={PageLogin} />
+        <Route path="/admin/logout" Component={PageLogout} />
         <Route path="/admin/signs/new" Component={PageSignEditor} />
         <Route path="/admin/signs/delete/:id" Component={PageSignDelete} />
         <Route path="/admin/signs/:id" Component={PageSignEdit} />
