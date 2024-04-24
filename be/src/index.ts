@@ -87,12 +87,17 @@ app.post('/api/logout', async (req, res) => {
 		res.status(400).send('Missing token');
 		return;
 	}
-	const session = await prisma.userSessions.delete({
-		where: {
-			token,
-		},
-	});
-	res.json(session);
+	try {
+		await prisma.userSessions.delete({
+			where: {
+				token: token,
+			},
+		});
+	} catch {
+
+	}finally {
+		res.json(true);
+	}
 });
 
 app.get('/api/signs/:id', async (req, res) => {

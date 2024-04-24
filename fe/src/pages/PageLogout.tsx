@@ -26,10 +26,10 @@ function PageLogout() {
 		);
 	}
 
+	handleLogout();
 	return (
 		<Layout>
-			<h1>Odhlášení</h1>
-			<button onClick={handleLogout}>Odhlásit se</button>
+			<h1>Odhlašuji ...</h1>
 		</Layout>
 	);
 }

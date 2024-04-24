@@ -16,7 +16,7 @@ function PageSignList() {
 		<Layout>
 			<ProtectLogin>
 				<h1>Tabule</h1>
-				<Link to="/admin/signs/new">
+				<Link to="/admin/new/sign">
 					Vytvořit novou tabuli
 				</Link>
 				<br />

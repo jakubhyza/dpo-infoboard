@@ -49,3 +49,17 @@ input[type="color"] {
 .menu a:last-of-type {
 	margin-left: auto;
 }
+
+.menu-item {
+	border-radius: 5px;
+	display: inline-block;
+	color: white;
+	padding: 1rem;
+	text-decoration: none;
+}
+.menu-item:hover {
+	background-color: #444;
+}
+.menu-item.active {
+	background-color: #4caf50;
+}

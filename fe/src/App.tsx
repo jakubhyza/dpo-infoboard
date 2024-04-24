@@ -27,7 +27,7 @@ function App() {
       <Routes>
         <Route path="/admin/login" Component={PageLogin} />
         <Route path="/admin/logout" Component={PageLogout} />
-        <Route path="/admin/signs/new" Component={PageSignEditor} />
+        <Route path="/admin/new/sign" Component={PageSignEditor} />
         <Route path="/admin/signs/delete/:id" Component={PageSignDelete} />
         <Route path="/admin/signs/:id" Component={PageSignEdit} />
         <Route path="/admin/signs" Component={PageSignList} />
